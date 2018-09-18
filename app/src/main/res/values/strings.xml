@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ffem Integration</string>
+    <string name="launch_test">Launch Test</string>
+    <string name="no_dilution">No Dilution</string>
+    <string name="debug_mode">Debug mode</string>
+    <plurals name="dilutions">
+        <item quantity="one">No Dilution</item>
+        <item quantity="many">%1$d Times Dilution</item>
+        <item quantity="other">%1$d Times Dilution</item>
+    </plurals>
+    <string name="result_received">Result received</string>
+    <string name="no_result">No result</string>
+</resources>
