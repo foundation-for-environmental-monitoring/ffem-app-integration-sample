@@ -1,7 +1,10 @@
 package io.ffem.integration;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -11,6 +14,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 import static io.ffem.integration.Constants.EXTERNAL_REQUEST;
 import static io.ffem.integration.Constants.RESULT_JSON;
 import static io.ffem.integration.Constants.TEST_ID_KEY;
@@ -19,17 +24,22 @@ public class MainActivity extends AppCompatActivity {
 
     // ********* Soil Configuration **********
 
+    private static final String APP_TITLE = "ffem Soil";
+
     // To launch ffem Soil app
     private static final String EXTERNAL_APP_ACTION = "io.ffem.soil";
 
     // Look up test id in json file at:
     // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
     private static final String TEST_ID = "3353f5cf-1cd2-4bf5-b47f-15d3db917add"; // Available Iron
+    private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=io.ffem.soil";
 
     // ***************************************
 
 
     // ********* Water Configuration *********
+
+//    private static final String APP_TITLE = "ffem Water";
 
     // To launch ffem Water app
     // private static final String EXTERNAL_APP_ACTION = "io.ffem.water";
@@ -37,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     // Look up test id in json file at:
     // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
     // private static final String TEST_ID = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"; // Fluoride
+//    private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=io.ffem.water";
 
     // ***************************************
 
@@ -69,12 +80,27 @@ public class MainActivity extends AppCompatActivity {
         // Specify the id of the test to be launched in the ffem app
         data.putString(TEST_ID_KEY, TEST_ID);
 
-        // Specify which app to start with the action string (Water or Soil app)
-        Intent intent = new Intent(EXTERNAL_APP_ACTION);
-        intent.putExtras(data);
+        try {
+            // Specify which app to start with the action string (Water or Soil app)
+            Intent intent = new Intent(EXTERNAL_APP_ACTION);
+            intent.putExtras(data);
 
-        // Start the external app activity
-        startActivityForResult(intent, EXTERNAL_REQUEST);
+            // Start the external app activity
+            startActivityForResult(intent, EXTERNAL_REQUEST);
+
+        } catch (ActivityNotFoundException e) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog);
+
+            builder.setTitle(R.string.app_not_found)
+                    .setMessage(String.format(Locale.US, getString(R.string.install_app), APP_TITLE))
+                    .setPositiveButton(R.string.go_to_play_store, (dialogInterface, i1)
+                            -> startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(PLAY_STORE_URL))))
+                    .setNegativeButton(android.R.string.cancel,
+                            (dialogInterface, i1) -> dialogInterface.dismiss())
+                    .setCancelable(false)
+                    .show();
+        }
     }
 
     @Override
