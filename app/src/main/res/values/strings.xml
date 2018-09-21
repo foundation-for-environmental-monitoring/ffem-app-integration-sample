@@ -7,4 +7,6 @@
     <string name="app_not_found">App not found</string>
     <string name="install_app">%s app is required to launch the test.\n\nYou can install the app from Play store.</string>
     <string name="go_to_play_store">Go to Play store</string>
+    <string name="soil_test_name">Soil - Available Iron</string>
+    <string name="water_test_name">Water - Fluoride</string>
 </resources>

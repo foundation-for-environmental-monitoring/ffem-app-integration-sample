@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,37 +23,11 @@ import static io.ffem.integration.Constants.TEST_ID_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
-    // ********* Soil Configuration **********
-
-    private static final String APP_TITLE = "ffem Soil";
-
-    // To launch ffem Soil app
-    private static final String EXTERNAL_APP_ACTION = "io.ffem.soil";
-
-    // Look up test id in json file at:
-    // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
-    private static final String TEST_ID = "3353f5cf-1cd2-4bf5-b47f-15d3db917add"; // Available Iron
-    private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=io.ffem.soil";
-
-    // ***************************************
-
-
-    // ********* Water Configuration *********
-
-//    private static final String APP_TITLE = "ffem Water";
-
-    // To launch ffem Water app
-    // private static final String EXTERNAL_APP_ACTION = "io.ffem.water";
-
-    // Look up test id in json file at:
-    // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
-    // private static final String TEST_ID = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"; // Fluoride
-//    private static final String PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=io.ffem.water";
-
-    // ***************************************
+    private final String playStoreUrl = "https://play.google.com/store/apps/details?id=";
 
     private TextView textResult;
     private CheckBox debugMode;
+    private RadioButton soilTestCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +44,34 @@ public class MainActivity extends AppCompatActivity {
      */
     public void launchTest(@SuppressWarnings("unused") View view) {
 
+        String appTitle;
+        String externalAppAction;
+        String testId;
+
+        if (soilTestCheckBox.isChecked()) {
+
+            appTitle = "ffem Soil";
+
+            // To launch ffem Soil app
+            externalAppAction = "io.ffem.soil";
+
+            // Look up test id in json file at:
+            // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
+            testId = "3353f5cf-1cd2-4bf5-b47f-15d3db917add"; // Available Iron
+
+        } else {
+
+            appTitle = "ffem Water";
+
+            // To launch ffem Water app
+            externalAppAction = "io.ffem.water";
+
+            // Look up test id in json file at:
+            // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
+            testId = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"; // Fluoride
+
+        }
+
         Bundle data = new Bundle();
 
         // Check whether to run the external app in debug mode to receive dummy results
@@ -78,11 +81,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Specify the id of the test to be launched in the ffem app
-        data.putString(TEST_ID_KEY, TEST_ID);
+        data.putString(TEST_ID_KEY, testId);
 
         try {
             // Specify which app to start with the action string (Water or Soil app)
-            Intent intent = new Intent(EXTERNAL_APP_ACTION);
+            Intent intent = new Intent(externalAppAction);
             intent.putExtras(data);
 
             // Start the external app activity
@@ -92,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog);
 
             builder.setTitle(R.string.app_not_found)
-                    .setMessage(String.format(Locale.US, getString(R.string.install_app), APP_TITLE))
+                    .setMessage(String.format(Locale.US, getString(R.string.install_app), appTitle))
                     .setPositiveButton(R.string.go_to_play_store, (dialogInterface, i1)
                             -> startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse(PLAY_STORE_URL))))
+                            Uri.parse(playStoreUrl + externalAppAction))))
                     .setNegativeButton(android.R.string.cancel,
                             (dialogInterface, i1) -> dialogInterface.dismiss())
                     .setCancelable(false)
@@ -166,5 +169,7 @@ public class MainActivity extends AppCompatActivity {
         textResult = findViewById(R.id.result);
         debugMode = findViewById(R.id.debugMode);
         debugMode.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
+        soilTestCheckBox = findViewById(R.id.soilTest);
+        soilTestCheckBox.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
     }
 }
