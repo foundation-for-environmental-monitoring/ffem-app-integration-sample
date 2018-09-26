@@ -109,16 +109,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
-        if (requestCode == EXTERNAL_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == EXTERNAL_REQUEST) {
+            if (resultCode == RESULT_OK) {
 
-            displayResult(intent);
+                displayResult(intent);
 
-            Toast.makeText(this, R.string.result_received, Toast.LENGTH_SHORT).show();
-        } else {
+                Toast.makeText(this, R.string.result_received, Toast.LENGTH_SHORT).show();
 
-            clearResultDisplay();
+            } else {
 
-            Toast.makeText(this, R.string.no_result, Toast.LENGTH_SHORT).show();
+                clearResultDisplay();
+
+                Toast.makeText(this, R.string.test_cancelled, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

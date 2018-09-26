@@ -9,4 +9,5 @@
     <string name="go_to_play_store">Go to Play store</string>
     <string name="soil_test_name">Soil - Available Iron</string>
     <string name="water_test_name">Water - Fluoride</string>
+    <string name="test_cancelled">Test Cancelled</string>
 </resources>
