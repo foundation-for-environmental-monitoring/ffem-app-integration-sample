@@ -6,40 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:padding="16dp"
         android:background="#eee"
+        android:id="@+id/selectLayout"
+        android:layout_width="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/soilTest"
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="13dp"
-            android:checked="true"
-            android:text="@string/soil_test_name"
-            android:textSize="15sp" />
+            android:layout_height="wrap_content" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/water_test_name"
-            android:textSize="15sp" />
-    </RadioGroup>
+    </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/controlsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup">
+        app:layout_constraintTop_toBottomOf="@id/selectLayout">
 
         <TextView
             android:id="@+id/result"

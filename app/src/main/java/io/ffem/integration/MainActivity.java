@@ -9,14 +9,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import static io.ffem.integration.Constants.EXTERNAL_REQUEST;
@@ -25,12 +28,17 @@ import static io.ffem.integration.Constants.TEST_ID_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String playStoreUrl = "https://play.google.com/store/apps/details?id=";
+    private static final String playStoreUrl = "https://play.google.com/store/apps/details?id=";
+    private static final String AVAILABLE_IRON = "Soil - Available Iron";
+    private static final String CALCIUM_MAGNESIUM = "Soil - Exchangeable Calcium and Magnesium";
+    private static final String FLUORIDE = "Water - Fluoride";
+    private static final String INVALID_TEST = "Invalid Test Example";
 
-    private RadioButton soilTestCheckBox;
     private TextView textResult;
     private CheckBox debugMode;
     private CheckBox themeCheckBox;
+
+    private String selectedTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +59,48 @@ public class MainActivity extends AppCompatActivity {
         String externalAppAction;
         String testId;
 
-        if (soilTestCheckBox.isChecked()) {
+        switch (selectedTest) {
+            case AVAILABLE_IRON:
+                appTitle = "ffem Soil";
 
-            appTitle = "ffem Soil";
+                // To launch ffem Soil app
+                externalAppAction = "io.ffem.soil";
 
-            // To launch ffem Soil app
-            externalAppAction = "io.ffem.soil";
+                // Look up test id in json file at:
+                // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
+                testId = "3353f5cf-1cd2-4bf5-b47f-15d3db917add";
+                break;
 
-            // Look up test id in json file at:
-            // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
-            testId = "3353f5cf-1cd2-4bf5-b47f-15d3db917add"; // Available Iron
+            case CALCIUM_MAGNESIUM:
+                appTitle = "ffem Soil";
 
-        } else {
+                // To launch ffem Soil app
+                externalAppAction = "io.ffem.soil";
 
-            appTitle = "ffem Water";
+                // Look up test id in json file at:
+                // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
+                testId = "52ec4ca0-d691-4f2b-b17a-232c2966974a";
+                break;
 
-            // To launch ffem Water app
-            externalAppAction = "io.ffem.water";
+            case FLUORIDE:
+                appTitle = "ffem Water";
 
-            // Look up test id in json file at:
-            // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
-            testId = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"; // Fluoride
+                // To launch ffem Water app
+                externalAppAction = "io.ffem.water";
+
+                // Look up test id in json file at:
+                // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
+                testId = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf";
+                break;
+
+            default:
+                appTitle = "ffem Water";
+
+                // To launch ffem Water app
+                externalAppAction = "io.ffem.water";
+
+                testId = "invalid-test-id";
+                break;
 
         }
 
@@ -181,8 +210,37 @@ public class MainActivity extends AppCompatActivity {
         debugMode = findViewById(R.id.debugMode);
         debugMode.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
         themeCheckBox = findViewById(R.id.themeCheckBox);
-        soilTestCheckBox = findViewById(R.id.soilTest);
-        soilTestCheckBox.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
+        Spinner spinner = findViewById(R.id.spinner);
+
+        ArrayList<String> tests = new ArrayList<>();
+
+        tests.add(AVAILABLE_IRON);
+        tests.add(CALCIUM_MAGNESIUM);
+        tests.add(FLUORIDE);
+        tests.add(INVALID_TEST);
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, tests);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearResultDisplay();
+                selectedTest = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void showToastMessage(@StringRes int stringKey) {
