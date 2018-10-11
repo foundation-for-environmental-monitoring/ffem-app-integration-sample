@@ -2,6 +2,7 @@
     <string name="app_name">ffem Integration</string>
     <string name="launch_test">Launch Test</string>
     <string name="debug_mode">Debug mode</string>
+    <string name="use_theme">Use theme</string>
     <string name="result_received">Result received</string>
     <string name="no_result">No result</string>
     <string name="app_not_found">App not found</string>

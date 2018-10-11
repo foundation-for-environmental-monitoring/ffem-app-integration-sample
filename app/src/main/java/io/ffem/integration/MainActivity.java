@@ -4,8 +4,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -25,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     private final String playStoreUrl = "https://play.google.com/store/apps/details?id=";
 
+    private RadioButton soilTestCheckBox;
     private TextView textResult;
     private CheckBox debugMode;
-    private RadioButton soilTestCheckBox;
+    private CheckBox themeCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         // Specify the id of the test to be launched in the ffem app
         data.putString(TEST_ID_KEY, testId);
 
+        // Check whether to run the external app in debug mode to receive dummy results
+        if (themeCheckBox.isChecked()) {
+            data.putString("theme", "Green");
+        }
+
         try {
             // Specify which app to start with the action string (Water or Soil app)
             Intent intent = new Intent(externalAppAction);
@@ -114,13 +122,13 @@ public class MainActivity extends AppCompatActivity {
 
                 displayResult(intent);
 
-                Toast.makeText(this, R.string.result_received, Toast.LENGTH_SHORT).show();
+                showToastMessage(R.string.result_received);
 
             } else {
 
                 clearResultDisplay();
 
-                Toast.makeText(this, R.string.test_cancelled, Toast.LENGTH_SHORT).show();
+                showToastMessage(R.string.test_cancelled);
             }
         }
     }
@@ -172,7 +180,15 @@ public class MainActivity extends AppCompatActivity {
         textResult = findViewById(R.id.result);
         debugMode = findViewById(R.id.debugMode);
         debugMode.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
+        themeCheckBox = findViewById(R.id.themeCheckBox);
         soilTestCheckBox = findViewById(R.id.soilTest);
         soilTestCheckBox.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
+    }
+
+    private void showToastMessage(@StringRes int stringKey) {
+        Toast toast = Toast.makeText(this, stringKey,
+                Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 300);
+        toast.show();
     }
 }
