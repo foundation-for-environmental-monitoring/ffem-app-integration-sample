@@ -33,12 +33,15 @@ public class MainActivity extends AppCompatActivity {
     private static final String CALCIUM_MAGNESIUM = "Soil - Exchangeable Calcium and Magnesium";
     private static final String FLUORIDE = "Water - Fluoride";
     private static final String INVALID_TEST = "Invalid Test Example";
+    private static final String SELECT_THEME = "Select theme";
+    private static final String DEFAULT_THEME = "Default";
+    private static final String GREEN_THEME = "Green";
 
     private TextView textResult;
     private CheckBox debugMode;
-    private CheckBox themeCheckBox;
 
     private String selectedTest;
+    private String selectedTheme = DEFAULT_THEME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +119,15 @@ public class MainActivity extends AppCompatActivity {
         data.putString(TEST_ID_KEY, testId);
 
         // Check whether to run the external app in debug mode to receive dummy results
-        if (themeCheckBox.isChecked()) {
-            data.putString("theme", "Green");
-        }
+        data.putString("theme", selectedTheme);
+
+//        if (selectedTheme.equals(GREEN_THEME)) {
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//            byte[] byteArray = stream.toByteArray();
+//            data.putByteArray("image", byteArray);
+//        }
 
         try {
             // Specify which app to start with the action string (Water or Soil app)
@@ -157,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
 
                 clearResultDisplay();
 
-                showToastMessage(R.string.test_cancelled);
             }
         }
     }
@@ -209,11 +217,10 @@ public class MainActivity extends AppCompatActivity {
         textResult = findViewById(R.id.result);
         debugMode = findViewById(R.id.debugMode);
         debugMode.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
-        themeCheckBox = findViewById(R.id.themeCheckBox);
         Spinner spinner = findViewById(R.id.spinner);
+        Spinner themeSpinner = findViewById(R.id.themeSpinner);
 
         ArrayList<String> tests = new ArrayList<>();
-
         tests.add(AVAILABLE_IRON);
         tests.add(CALCIUM_MAGNESIUM);
         tests.add(FLUORIDE);
@@ -238,7 +245,29 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
+        ArrayList<String> themes = new ArrayList<>();
+        themes.add(SELECT_THEME);
+        themes.add(DEFAULT_THEME);
+        themes.add(GREEN_THEME);
+
+        ArrayAdapter<String> themeDataAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, themes);
+
+        themeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        themeSpinner.setAdapter(themeDataAdapter);
+
+        themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedTheme = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
@@ -246,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
     private void showToastMessage(@StringRes int stringKey) {
         Toast toast = Toast.makeText(this, stringKey,
                 Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, 300);
+        toast.setGravity(Gravity.BOTTOM, 0, 250);
         toast.show();
     }
 }
