@@ -1,20 +1,21 @@
 package io.ffem.integration;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
+import android.os.Handler;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,26 +27,23 @@ import static io.ffem.integration.Constants.EXTERNAL_REQUEST;
 import static io.ffem.integration.Constants.RESULT_JSON;
 import static io.ffem.integration.Constants.TEST_ID_KEY;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String playStoreUrl = "https://play.google.com/store/apps/details?id=";
     private static final String AVAILABLE_IRON = "Soil - Available Iron";
     private static final String CALCIUM_MAGNESIUM = "Soil - Exchangeable Calcium and Magnesium";
     private static final String FLUORIDE = "Water - Fluoride";
     private static final String INVALID_TEST = "Invalid Test Example";
-    private static final String SELECT_THEME = "Select theme";
-    private static final String DEFAULT_THEME = "Default";
-    private static final String GREEN_THEME = "Green";
-
     private TextView textResult;
     private CheckBox debugMode;
-
     private String selectedTest;
-    private String selectedTheme = DEFAULT_THEME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setAppTheme();
+
         setContentView(R.layout.activity_main);
 
         initialize();
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param view the View
      */
+    @SuppressWarnings("unused")
     public void launchTest(@SuppressWarnings("unused") View view) {
 
         String appTitle;
@@ -118,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
         // Specify the id of the test to be launched in the ffem app
         data.putString(TEST_ID_KEY, testId);
 
-        // Check whether to run the external app in debug mode to receive dummy results
-        data.putString("theme", selectedTheme);
+        // todo: NOTE: Theme feature is work in progress and will not currently work
+        data.putString("theme", getSelectedTheme());
 
 //        if (selectedTheme.equals(GREEN_THEME)) {
 //            ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -187,11 +186,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
         /*
-
         Example of result JSON string:
-
             {
                 "type": "io.ffem.soil",
                 "name": "Available Iron",
@@ -205,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
                 }],
                 "testDate": "2018-09-19 01:05"
             }
-
         */
     }
 
@@ -218,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
         debugMode = findViewById(R.id.debugMode);
         debugMode.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
         Spinner spinner = findViewById(R.id.spinner);
-        Spinner themeSpinner = findViewById(R.id.themeSpinner);
 
         ArrayList<String> tests = new ArrayList<>();
         tests.add(AVAILABLE_IRON);
@@ -247,35 +241,26 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        ArrayList<String> themes = new ArrayList<>();
-        themes.add(SELECT_THEME);
-        themes.add(DEFAULT_THEME);
-        themes.add(GREEN_THEME);
-
-        ArrayAdapter<String> themeDataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, themes);
-
-        themeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        themeSpinner.setAdapter(themeDataAdapter);
-
-        themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedTheme = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
-    private void showToastMessage(@StringRes int stringKey) {
-        Toast toast = Toast.makeText(this, stringKey,
-                Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, 250);
-        toast.show();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public void onThemeSelectClick(MenuItem item) {
+        DialogFragment dialogFragment = new ThemeSelectDialog();
+
+        ((ThemeSelectDialog) dialogFragment).DismissListener(dismissListener);
+
+        new Handler().post(() -> {
+            dialogFragment.show(getSupportFragmentManager(), "");
+        });
+
+    }
+
+    public interface DialogDismissListener {
+        void dialogDismissed(DialogInterface dialog);
     }
 }
