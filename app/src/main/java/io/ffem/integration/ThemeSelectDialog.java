@@ -21,14 +21,17 @@ public class ThemeSelectDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
 
         String theme = getSelectedTheme();
+        int selectedThemeIndex = 0;
         String[] themes = getResources().getStringArray(R.array.themes);
         for (int i = 0; i < themes.length; i++) {
             if (themes[i].equals(theme)) {
-                builder.setTitle(R.string.use_theme)
-                        .setSingleChoiceItems(R.array.themes, i, (dialog, which) -> setPreference(which));
+                selectedThemeIndex = i;
                 break;
             }
         }
+
+        builder.setTitle(R.string.selected_theme)
+                .setSingleChoiceItems(R.array.themes, selectedThemeIndex, (dialog, which) -> setPreference(which));
 
         return builder.create();
     }

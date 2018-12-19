@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity {
         // Specify the id of the test to be launched in the ffem app
         data.putString(TEST_ID_KEY, testId);
 
-        // todo: NOTE: Theme feature is work in progress and will not currently work
+        // todo: NOTE: This theme feature is not yet ready and will not work. To be completed.
         data.putString("theme", getSelectedTheme());
 
 //        if (selectedTheme.equals(GREEN_THEME)) {
@@ -254,9 +254,7 @@ public class MainActivity extends BaseActivity {
 
         ((ThemeSelectDialog) dialogFragment).DismissListener(dismissListener);
 
-        new Handler().post(() -> {
-            dialogFragment.show(getSupportFragmentManager(), "");
-        });
+        new Handler().post(() -> dialogFragment.show(getSupportFragmentManager(), null));
 
     }
 
