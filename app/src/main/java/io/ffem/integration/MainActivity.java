@@ -5,11 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,7 +31,7 @@ public class MainActivity extends BaseActivity {
     private static final String FLUORIDE = "Water - Fluoride";
     private static final String INVALID_TEST = "Invalid Test Example";
     private TextView textResult;
-    private CheckBox debugMode;
+    private CheckBox dummyResultCheckBox;
     private String selectedTest;
 
     @Override
@@ -109,7 +105,7 @@ public class MainActivity extends BaseActivity {
         Bundle data = new Bundle();
 
         // Check whether to run the external app in debug mode to receive dummy results
-        if (debugMode.isChecked()) {
+        if (dummyResultCheckBox.isChecked()) {
             // todo: For testing of app integration only. Remove this line for Production app
             data.putBoolean("debugMode", true);
         }
@@ -117,8 +113,7 @@ public class MainActivity extends BaseActivity {
         // Specify the id of the test to be launched in the ffem app
         data.putString(TEST_ID_KEY, testId);
 
-        // todo: NOTE: This theme feature is not yet ready and will not work. To be completed.
-        data.putString("theme", getSelectedTheme());
+//        data.putString("theme", getSelectedTheme());
 
 //        if (selectedTheme.equals(GREEN_THEME)) {
 //            ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -210,8 +205,8 @@ public class MainActivity extends BaseActivity {
 
     private void initialize() {
         textResult = findViewById(R.id.result);
-        debugMode = findViewById(R.id.debugMode);
-        debugMode.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
+        dummyResultCheckBox = findViewById(R.id.dummyResultCheckBox);
+        dummyResultCheckBox.setOnCheckedChangeListener((compoundButton, b) -> clearResultDisplay());
         Spinner spinner = findViewById(R.id.spinner);
 
         ArrayList<String> tests = new ArrayList<>();
@@ -243,20 +238,17 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    public void onThemeSelectClick(MenuItem item) {
-        DialogFragment dialogFragment = new ThemeSelectDialog();
-
-        ((ThemeSelectDialog) dialogFragment).DismissListener(dismissListener);
-
-        new Handler().post(() -> dialogFragment.show(getSupportFragmentManager(), null));
-
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    public void onThemeSelectClick(MenuItem item) {
+//        ThemeSelectDialog dialogFragment = new ThemeSelectDialog();
+//        dialogFragment.DismissListener(dismissListener);
+//        new Handler().post(() -> dialogFragment.show(getSupportFragmentManager(), null));
+//    }
 
     public interface DialogDismissListener {
         void dialogDismissed(DialogInterface dialog);
