@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +17,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
+import androidx.appcompat.app.AlertDialog;
 
 import static io.ffem.integration.Constants.EXTERNAL_REQUEST;
 import static io.ffem.integration.Constants.RESULT_JSON;
