@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+@SuppressWarnings("ALL")
 public class ThemeSelectDialog extends DialogFragment {
 
     private MainActivity.DialogDismissListener dismissListener;

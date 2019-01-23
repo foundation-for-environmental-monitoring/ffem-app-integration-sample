@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
+    @SuppressWarnings("unused")
     MainActivity.DialogDismissListener dismissListener = dialog -> {
         setAppTheme();
         finish();
@@ -31,7 +32,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    String getSelectedTheme() {
+    private String getSelectedTheme() {
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         return sharedPref.getString(getString(R.string.selected_theme_key), "");
     }
