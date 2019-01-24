@@ -19,19 +19,21 @@ import androidx.appcompat.app.AlertDialog;
  * <p>
  * The result is in the json format. Example:
  * <p>
- * {
- * "type": "io.ffem.soil",
- * "name": "Available Iron",
- * "uuid": "3353f5cf-1cd2-4bf5-b47f-15d3db917add",
- * "result": [{
- * "dilution": 3,    (Note: 0 or 1 = 'No Dilution', 2 = '2 Times Dilution', etc...)
- * "name": "Available Iron",
- * "unit": "mg/l",
- * "id": 1,
- * "value": "> 30.00"
- * }],
- * "testDate": "2018-09-19 01:05"
- * }
+ * <pre>
+ *  {
+ *      "type": "io.ffem.soil",
+ *      "name": "Available Iron",
+ *      "uuid": "3353f5cf-1cd2-4bf5-b47f-15d3db917add",
+ *      "result": [{
+ *          "dilution": 3,    (Note: 0 or 1 = 'No Dilution', 2 = '2 Times Dilution', etc...)
+ *          "name": "Available Iron",
+ *          "unit": "mg/l",
+ *          "id": 1,
+ *          "value": "> 30.00"
+ *      }],
+ *      "testDate": "2018-09-19 01:05"
+ *  }
+ * </pre>
  */
 public class MainActivity extends MainBaseActivity {
 
@@ -52,7 +54,7 @@ public class MainActivity extends MainBaseActivity {
         try {
 
             // setup the details required by the ffem app to launch the test
-            setupBundleData(data);
+            setupTestInformation(data);
 
             // Specify which app to start with the action string (Water or Soil app)
             Intent intent = new Intent(externalAppAction);
@@ -109,7 +111,7 @@ public class MainActivity extends MainBaseActivity {
      *
      * @param data the bundle data
      */
-    private void setupBundleData(Bundle data) {
+    private void setupTestInformation(Bundle data) {
 
         String testId;
         switch (selectedTest) {
@@ -119,7 +121,7 @@ public class MainActivity extends MainBaseActivity {
                 // To launch ffem Soil app
                 externalAppAction = "io.ffem.soil";
 
-                // Look up test id in json file at:
+                // Look up test 'uuid' in json file at:
                 // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
                 testId = "3353f5cf-1cd2-4bf5-b47f-15d3db917add";
                 break;
@@ -130,7 +132,7 @@ public class MainActivity extends MainBaseActivity {
                 // To launch ffem Soil app
                 externalAppAction = "io.ffem.soil";
 
-                // Look up test id in json file at:
+                // Look up test 'uuid' in json file at:
                 // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
                 testId = "52ec4ca0-d691-4f2b-b17a-232c2966974a";
                 break;
@@ -141,7 +143,7 @@ public class MainActivity extends MainBaseActivity {
                 // To launch ffem Water app
                 externalAppAction = "io.ffem.water";
 
-                // Look up test id in json file at:
+                // Look up test 'uuid' in json file at:
                 // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
                 testId = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf";
                 break;
@@ -168,8 +170,8 @@ public class MainActivity extends MainBaseActivity {
 
 
     /**
-     * Here we display the json text.
-     * The json can be parsed and used as required in your app
+     * Here we are displaying the json text in our demo app
+     * But the json can be parsed and used as required in your app
      *
      * @param intent the Intent containing the result
      */
