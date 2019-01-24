@@ -51,6 +51,9 @@ Sample app to demonstrate external app integration with ffem Water and ffem Soil
       data.putString("testId", "3353f5cf-1cd2-4bf5-b47f-15d3db917add");
       
       // To make testing the integration easier also set debugMode to true
+      // This will make the ffem apps return a dummy result
+      // This way conducting an actual water or soil test can be avoided 
+      // while testing the integration to save development time
       data.putBoolean("debugMode", true);
       // Note: do not use the above line for production app.
       
