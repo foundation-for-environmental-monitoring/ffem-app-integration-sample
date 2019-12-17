@@ -1,4 +1,4 @@
-# ffem-app-integration-sample
+# ffem-app-integration-sample (Java version)
 Sample app to demonstrate external app integration with ffem Water and ffem Soil
 
 # Setup
