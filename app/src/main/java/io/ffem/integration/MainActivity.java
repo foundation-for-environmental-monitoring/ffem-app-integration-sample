@@ -6,12 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Locale;
-
-import androidx.appcompat.app.AlertDialog;
 
 /**
  * All the code required for integration with ffem apps is in the
@@ -90,6 +90,7 @@ public class MainActivity extends MainBaseActivity {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
 
         if (requestCode == EXTERNAL_REQUEST) {
             if (resultCode == RESULT_OK) {
