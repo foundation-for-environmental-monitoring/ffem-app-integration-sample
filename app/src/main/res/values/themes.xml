@@ -9,12 +9,4 @@
         <item name="primaryButtonText">@color/button_text</item>
     </style>
 
-    <style name="AppTheme.Green" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primary_2</item>
-        <item name="colorPrimaryDark">@color/primary_dark_2</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="primaryButtonStyle">@style/AppTheme.Green.Button</item>
-        <item name="primaryButtonText">@color/button_text_2</item>
-    </style>
-
 </resources>

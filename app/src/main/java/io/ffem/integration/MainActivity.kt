@@ -125,6 +125,14 @@ class MainActivity : MainBaseActivity() {
 // https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
                 testId = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"
             }
+            Constants.FLUORIDE_LITE -> {
+                appTitle = "ffem Lite"
+                // To launch ffem Lite app
+                externalAppAction = "io.ffem.lite"
+                // Look up test 'uuid' in json file at:
+// https://github.com/foundation-for-environmental-monitoring/ffem-lite/blob/master/app/src/main/res/raw/calibration.json
+                testId = "f0f3c1dd-89af-49f1-83e7-bcc31cb61159"
+            }
             else -> {
                 appTitle = "ffem Water"
                 // To launch ffem Water app

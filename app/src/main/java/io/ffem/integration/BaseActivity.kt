@@ -8,13 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import io.ffem.integration.R.style
 
 open class BaseActivity : AppCompatActivity() {
-//    var dismissListener = DialogDismissListener { dialog: DialogInterface? ->
-//        setAppTheme()
-//        finish()
-//        val intent = intent
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        startActivity(intent)
-//    }
 
     fun setAppTheme() {
         try {

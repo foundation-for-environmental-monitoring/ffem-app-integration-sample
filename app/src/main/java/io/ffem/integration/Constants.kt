@@ -7,6 +7,7 @@ internal object Constants {
     const val AVAILABLE_IRON = "Soil - Available Iron"
     const val CALCIUM_MAGNESIUM = "Soil - Exchangeable Calcium and Magnesium"
     const val FLUORIDE = "Water - Fluoride"
+    const val FLUORIDE_LITE = "Water - Fluoride (ffem Lite)"
     const val INVALID_TEST = "Invalid Test Example"
     // Keys
     const val TEST_ID_KEY = "testId"

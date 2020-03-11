@@ -1,6 +1,5 @@
 package io.ffem.integration
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -36,6 +35,7 @@ open class MainBaseActivity : BaseActivity() {
         tests.add(Constants.AVAILABLE_IRON)
         tests.add(Constants.CALCIUM_MAGNESIUM)
         tests.add(Constants.FLUORIDE)
+        tests.add(Constants.FLUORIDE_LITE)
         tests.add(Constants.INVALID_TEST)
         // Creating adapter for spinner
         val dataAdapter = ArrayAdapter(this,
@@ -52,9 +52,5 @@ open class MainBaseActivity : BaseActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-    }
-
-    interface DialogDismissListener {
-        fun dialogDismissed(dialog: DialogInterface?)
     }
 }
