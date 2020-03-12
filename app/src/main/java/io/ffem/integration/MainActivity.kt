@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -39,6 +40,7 @@ import java.util.*
 class MainActivity : MainBaseActivity() {
     private var appTitle: String? = null
     private var externalAppAction: String? = null
+
     /**
      * Method called by launch test button.
      *
@@ -143,7 +145,7 @@ class MainActivity : MainBaseActivity() {
         // Specify the id of the test to be launched in the ffem app
         data.putString(Constants.TEST_ID_KEY, testId)
         // Check whether to run the external app in debug mode to receive dummy results
-        if (dummyResultCheckBox!!.isChecked) { // todo: For testing of app integration only. Remove this line for Production app
+        if (check_dummy_result!!.isChecked) { // todo: For testing of app integration only. Remove this line for Production app
             data.putBoolean("debugMode", true)
         }
     }
@@ -156,11 +158,22 @@ class MainActivity : MainBaseActivity() {
      */
     private fun displayResult(intent: Intent?) {
         intent!!.extras
-        if (intent.hasExtra(Constants.RESULT_JSON)) { // Display JSON result
+        if (intent.hasExtra(Constants.RESULT_JSON)) {
+            // Display JSON result
             val jsonString = intent.getStringExtra(Constants.RESULT_JSON)
             try {
                 if (jsonString != null) {
-                    textResult!!.text = JSONObject(jsonString).toString(2)
+                    text_result!!.text = JSONObject(jsonString).toString(2)
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        } else if (intent.hasExtra(Constants.TEST_VALUE)) {
+            // if json does not exist then use this alternate simple result
+            val resultString = intent.getStringExtra(Constants.TEST_VALUE)
+            try {
+                if (resultString != null) {
+                    text_result!!.text = getString(R.string.result_display, resultString)
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()

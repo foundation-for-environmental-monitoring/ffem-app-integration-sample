@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinner_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/selectLayout">
 
         <TextView
-            android:id="@+id/result"
+            android:id="@+id/text_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -71,7 +71,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatCheckBox
-            android:id="@+id/dummyResultCheckBox"
+            android:id="@+id/check_dummy_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

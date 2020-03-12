@@ -12,4 +12,5 @@ internal object Constants {
     // Keys
     const val TEST_ID_KEY = "testId"
     const val RESULT_JSON = "resultJson"
+    const val TEST_VALUE = "value"
 }
