@@ -3,11 +3,13 @@
     <string name="launch_test">Launch Test</string>
     <string name="request_dummy_result">Request a dummy result</string>
     <string name="result_received">Result received</string>
+    <string name="result_display">Result: %s</string>
     <string name="app_not_found">App not found</string>
     <string name="install_app">%s app is required to launch the test.\n\nYou can install the app from Play store.</string>
     <string name="go_to_play_store">Go to Play store</string>
 
     <!--Keys-->
     <string name="selected_theme_key">selected_theme</string>
+    <string name="selected_test_key">selected_test</string>
 
 </resources>
