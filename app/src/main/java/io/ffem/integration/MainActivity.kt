@@ -1,17 +1,12 @@
 package io.ffem.integration
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.*
 
 /**
  * All the code required for integration with ffem apps is in the
@@ -55,18 +50,65 @@ class MainActivity : MainBaseActivity() {
             intent.putExtras(data)
             // Start the external app activity
             startActivityForResult(intent, EXTERNAL_REQUEST)
-        } catch (e: ActivityNotFoundException) { // The ffem app was not found so request the user to install the app from Play store
-            val builder = AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog)
-            builder.setTitle(R.string.app_not_found)
-                    .setMessage(String.format(Locale.US, getString(R.string.install_app), appTitle))
-                    .setPositiveButton(R.string.go_to_play_store) { _: DialogInterface?, _: Int ->
-                        startActivity(Intent(Intent.ACTION_VIEW,
-                                Uri.parse(Constants.playStoreUrl + externalAppAction)))
-                    }
-                    .setNegativeButton(android.R.string.cancel
-                    ) { dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
-                    .setCancelable(false)
-                    .show()
+        } catch (e: ActivityNotFoundException) {
+            // The ffem app was not found so request the user to install the app from Play store
+            showAppNotInstalledDialog(appTitle, externalAppAction)
+        }
+    }
+
+    /**
+     * Set up all the test information required by the ffem app
+     * See readme file on how to find uuid for a test parameter
+     *
+     *
+     * appTitle:            Which app to call ffem Water or ffem Soil
+     * externalAppAction:   The id of the app to launch (ffem Water or ffem Soil)
+     * testId               The id of the test the app should start after launch
+     * debugMode            Whether the app should return a dummy result or not
+     *
+     * @param data the bundle data
+     */
+    private fun setupTestInformation(data: Bundle) {
+        val testId = when (selectedTest) {
+            AVAILABLE_IRON -> {
+                appTitle = "ffem Soil"
+                externalAppAction = "io.ffem.soil"
+                "3353f5cf-1cd2-4bf5-b47f-15d3db917add"
+            }
+            CALCIUM_MAGNESIUM -> {
+                appTitle = "ffem Soil"
+                externalAppAction = "io.ffem.soil"
+                "52ec4ca0-d691-4f2b-b17a-232c2966974a"
+            }
+            FLUORIDE -> {
+                appTitle = "ffem Water"
+                externalAppAction = "io.ffem.water"
+                "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"
+            }
+            FLUORIDE_LITE -> {
+                appTitle = "ffem Lite"
+                externalAppAction = "io.ffem.lite"
+                "f0f3c1dd-89af-49f1-83e7-bcc31cb61159"
+            }
+            RESIDUAL_CHLORINE_LITE -> {
+                appTitle = "ffem Lite"
+                externalAppAction = "io.ffem.lite"
+                "f1d64b11-64c4-4a34-806e-ad0d47bcc96b"
+            }
+            else -> {
+                appTitle = "ffem Water"
+                externalAppAction = "io.ffem.water"
+                "invalid-test-id"
+            }
+        }
+
+        // Specify the id of the test to be launched in the ffem app
+        data.putString(TEST_ID_KEY, testId)
+
+        // Check whether to run the external app in debug mode to receive dummy results
+        // todo: For testing of app integration only. Remove this line for Production app
+        if (check_dummy_result!!.isChecked) {
+            data.putBoolean("debugMode", true)
         }
     }
 
@@ -80,73 +122,12 @@ class MainActivity : MainBaseActivity() {
     public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
         if (requestCode == EXTERNAL_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
+            if (resultCode == RESULT_OK) {
                 displayResult(intent)
                 showToastMessage(R.string.result_received)
             } else {
                 clearResultDisplay()
             }
-        }
-    }
-
-    /**
-     * Set up all the test information required by the ffem app
-     *
-     *
-     * appTitle:            Which app to call ffem Water or ffem Soil
-     * externalAppAction:   The id of the app to launch (ffem Water or ffem Soil)
-     * testId               The id of the test the app should start after launch
-     * debugMode            Whether the app should return a dummy result or not
-     *
-     * @param data the bundle data
-     */
-    private fun setupTestInformation(data: Bundle) {
-        val testId: String
-        when (selectedTest) {
-            Constants.AVAILABLE_IRON -> {
-                appTitle = "ffem Soil"
-                // To launch ffem Soil app
-                externalAppAction = "io.ffem.soil"
-                // Look up test 'uuid' in json file at:
-// https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
-                testId = "3353f5cf-1cd2-4bf5-b47f-15d3db917add"
-            }
-            Constants.CALCIUM_MAGNESIUM -> {
-                appTitle = "ffem Soil"
-                // To launch ffem Soil app
-                externalAppAction = "io.ffem.soil"
-                // Look up test 'uuid' in json file at:
-// https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json
-                testId = "52ec4ca0-d691-4f2b-b17a-232c2966974a"
-            }
-            Constants.FLUORIDE -> {
-                appTitle = "ffem Water"
-                // To launch ffem Water app
-                externalAppAction = "io.ffem.water"
-                // Look up test 'uuid' in json file at:
-// https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json
-                testId = "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"
-            }
-            Constants.FLUORIDE_LITE -> {
-                appTitle = "ffem Lite"
-                // To launch ffem Lite app
-                externalAppAction = "io.ffem.lite"
-                // Look up test 'uuid' in json file at:
-// https://github.com/foundation-for-environmental-monitoring/ffem-lite/blob/master/app/src/main/res/raw/calibration.json
-                testId = "f0f3c1dd-89af-49f1-83e7-bcc31cb61159"
-            }
-            else -> {
-                appTitle = "ffem Water"
-                // To launch ffem Water app
-                externalAppAction = "io.ffem.water"
-                testId = "invalid-test-id"
-            }
-        }
-        // Specify the id of the test to be launched in the ffem app
-        data.putString(Constants.TEST_ID_KEY, testId)
-        // Check whether to run the external app in debug mode to receive dummy results
-        if (check_dummy_result!!.isChecked) { // todo: For testing of app integration only. Remove this line for Production app
-            data.putBoolean("debugMode", true)
         }
     }
 
@@ -158,9 +139,9 @@ class MainActivity : MainBaseActivity() {
      */
     private fun displayResult(intent: Intent?) {
         intent!!.extras
-        if (intent.hasExtra(Constants.RESULT_JSON)) {
+        if (intent.hasExtra(RESULT_JSON)) {
             // Display JSON result
-            val jsonString = intent.getStringExtra(Constants.RESULT_JSON)
+            val jsonString = intent.getStringExtra(RESULT_JSON)
             try {
                 if (jsonString != null) {
                     text_result!!.text = JSONObject(jsonString).toString(2)
@@ -168,9 +149,9 @@ class MainActivity : MainBaseActivity() {
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-        } else if (intent.hasExtra(Constants.TEST_VALUE)) {
+        } else if (intent.hasExtra(TEST_VALUE)) {
             // if json does not exist then use this alternate simple result
-            val resultString = intent.getStringExtra(Constants.TEST_VALUE)
+            val resultString = intent.getStringExtra(TEST_VALUE)
             try {
                 if (resultString != null) {
                     text_result!!.text = getString(R.string.result_display, resultString)
