@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ffem-app-integration-sample/app" />
-      <module fileurl="file://$PROJECT_DIR$/ffem-app-integration-sample.iml" filepath="$PROJECT_DIR$/ffem-app-integration-sample.iml" group="ffem-app-integration-sample" />
-      <module fileurl="file://$PROJECT_DIR$/app/ffem-app-integration-sample-app.iml" filepath="$PROJECT_DIR$/app/ffem-app-integration-sample-app.iml" group="ffem-app-integration-sample/app" />
-      <module fileurl="file://$PROJECT_DIR$/ffem-ffem-app-integration-sample.iml" filepath="$PROJECT_DIR$/ffem-ffem-app-integration-sample.iml" group="ffem-app-integration-sample" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ffem Integration/app" />
+      <module fileurl="file://$PROJECT_DIR$/ffem Integration.iml" filepath="$PROJECT_DIR$/ffem Integration.iml" group="ffem Integration" />
     </modules>
   </component>
 </project>
