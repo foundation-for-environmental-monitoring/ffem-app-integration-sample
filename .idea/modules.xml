@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ffem Integration/app" />
-      <module fileurl="file://$PROJECT_DIR$/ffem Integration.iml" filepath="$PROJECT_DIR$/ffem Integration.iml" group="ffem Integration" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ffem_Integration.iml" filepath="$PROJECT_DIR$/.idea/modules/ffem_Integration.iml" group="ffem_Integration" />
     </modules>
   </component>
 </project>
