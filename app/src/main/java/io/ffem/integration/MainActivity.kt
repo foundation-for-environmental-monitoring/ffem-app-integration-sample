@@ -58,7 +58,7 @@ class MainActivity : MainBaseActivity() {
 
     /**
      * Set up all the test information required by the ffem app
-     * See readme file on how to find uuid for a test parameter
+     * See README.md file on how to find uuid for a test parameter
      *
      *
      * appTitle:            Which app to call ffem Water or ffem Soil
@@ -70,6 +70,8 @@ class MainActivity : MainBaseActivity() {
      */
     private fun setupTestInformation(data: Bundle) {
         val testId = when (selectedTest) {
+
+            // See README.md file to get test ids for all tests
             AVAILABLE_IRON -> {
                 appTitle = "ffem Soil"
                 externalAppAction = "io.ffem.soil"

@@ -32,8 +32,8 @@ Sample app to demonstrate external app integration with ffem Water and ffem Soil
 
 # Where to find the meta info for the tests
 
-- For Soil tests get the info from <a href="https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/soil/assets/tests.json" target="_blank">Soil tests.json</a>
-- For Water tests get the info from <a href="https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/develop/caddisfly-app/app/src/water/assets/tests.json" target="_blank">Water tests.json</a>
+- For Soil tests get the info from <a href="https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/master/caddisfly-app/app/src/soil/assets/tests.json" target="_blank">Soil tests.json</a>
+- For Water tests get the info from <a href="https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/master/caddisfly-app/app/src/water/assets/tests.json" target="_blank">Water tests.json</a>
 
 # What info is needed to call ffem app
 
