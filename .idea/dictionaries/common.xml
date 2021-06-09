@@ -2,6 +2,10 @@
   <dictionary name="common">
     <words>
       <w>affero</w>
+      <w>appname</w>
+      <w>dorg</w>
+      <w>endlocal</w>
+      <w>errorlevel</w>
       <w>ffem</w>
       <w>licensors</w>
       <w>noncommercially</w>
