@@ -82,6 +82,11 @@ class MainActivity : MainBaseActivity() {
                 externalAppAction = "io.ffem.soil"
                 "52ec4ca0-d691-4f2b-b17a-232c2966974a"
             }
+            WATER_CALCIUM_MAGNESIUM -> {
+                appTitle = "ffem Water"
+                externalAppAction = "io.ffem.water"
+                "670d2d65-bb76-4d72-ae4f-867d031b7712"
+            }
             FLUORIDE -> {
                 appTitle = "ffem Water"
                 externalAppAction = "io.ffem.water"
@@ -96,6 +101,11 @@ class MainActivity : MainBaseActivity() {
                 appTitle = "ffem Lite"
                 externalAppAction = "io.ffem.lite"
                 "f1d64b11-64c4-4a34-806e-ad0d47bcc96b"
+            }
+            TOTAL_ALKALINITY -> {
+                appTitle = "ffem Water"
+                externalAppAction = "io.ffem.water"
+                "020dccb1-9a35-4097-bf02-292a92d7ae5a"
             }
             else -> {
                 appTitle = "ffem Water"

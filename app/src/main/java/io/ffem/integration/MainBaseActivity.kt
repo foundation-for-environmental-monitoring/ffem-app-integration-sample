@@ -38,12 +38,14 @@ open class MainBaseActivity : BaseActivity() {
         check_dummy_result!!.setOnCheckedChangeListener { _: CompoundButton?, _: Boolean -> clearResultDisplay() }
 
         val tests = mutableListOf(
-                AVAILABLE_IRON,
-                CALCIUM_MAGNESIUM,
-                FLUORIDE,
-                FLUORIDE_LITE,
-                RESIDUAL_CHLORINE_LITE,
-                INVALID_TEST
+            AVAILABLE_IRON,
+            CALCIUM_MAGNESIUM,
+            WATER_CALCIUM_MAGNESIUM,
+            FLUORIDE,
+            FLUORIDE_LITE,
+            RESIDUAL_CHLORINE_LITE,
+            TOTAL_ALKALINITY,
+            INVALID_TEST
         )
 
         // Creating adapter for spinner
@@ -55,7 +57,12 @@ open class MainBaseActivity : BaseActivity() {
         // attaching data adapter to spinner
         spinner_list.adapter = dataAdapter
         spinner_list.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
                 clearResultDisplay()
                 selectedTest = parent.getItemAtPosition(position).toString()
 
@@ -72,14 +79,19 @@ open class MainBaseActivity : BaseActivity() {
     protected fun showAppNotInstalledDialog(appTitle: String?, externalAppAction: String?) {
         val builder = AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog)
         builder.setTitle(R.string.app_not_found)
-                .setMessage(String.format(Locale.US, getString(R.string.install_app), appTitle))
-                .setPositiveButton(R.string.go_to_play_store) { _: DialogInterface?, _: Int ->
-                    startActivity(Intent(Intent.ACTION_VIEW,
-                            Uri.parse(PLAY_STORE_URL + externalAppAction)))
-                }
-                .setNegativeButton(android.R.string.cancel
-                ) { dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
-                .setCancelable(false)
-                .show()
+            .setMessage(String.format(Locale.US, getString(R.string.install_app), appTitle))
+            .setPositiveButton(R.string.go_to_play_store) { _: DialogInterface?, _: Int ->
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(PLAY_STORE_URL + externalAppAction)
+                    )
+                )
+            }
+            .setNegativeButton(
+                android.R.string.cancel
+            ) { dialogInterface: DialogInterface, _: Int -> dialogInterface.dismiss() }
+            .setCancelable(false)
+            .show()
     }
 }
