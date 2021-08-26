@@ -12,7 +12,7 @@ import android.widget.CompoundButton
 import androidx.appcompat.app.AlertDialog
 import io.ffem.integration.PreferencesUtil.getInt
 import io.ffem.integration.PreferencesUtil.setInt
-import kotlinx.android.synthetic.main.activity_main.*
+import io.ffem.integration.databinding.ActivityMainBinding
 import java.util.*
 
 /**
@@ -21,21 +21,24 @@ import java.util.*
  * Please see MainActivity for the integration code.
  */
 open class MainBaseActivity : BaseActivity() {
+    protected lateinit var b: ActivityMainBinding
     var selectedTest: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        b = ActivityMainBinding.inflate(layoutInflater)
+        val view = b.root
+        setContentView(view)
         setAppTheme()
-        setContentView(R.layout.activity_main)
         initialize()
     }
 
     fun clearResultDisplay() {
-        text_result!!.text = ""
+        b.textResult.text = ""
     }
 
     private fun initialize() {
-        check_dummy_result!!.setOnCheckedChangeListener { _: CompoundButton?, _: Boolean -> clearResultDisplay() }
+        b.checkDummyResult.setOnCheckedChangeListener { _: CompoundButton?, _: Boolean -> clearResultDisplay() }
 
         val tests = mutableListOf(
             AVAILABLE_IRON,
@@ -55,8 +58,8 @@ open class MainBaseActivity : BaseActivity() {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         // attaching data adapter to spinner
-        spinner_list.adapter = dataAdapter
-        spinner_list.onItemSelectedListener = object : OnItemSelectedListener {
+        b.spinnerList.adapter = dataAdapter
+        b.spinnerList.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View,
@@ -73,11 +76,11 @@ open class MainBaseActivity : BaseActivity() {
         }
 
         // set the selected test to previously selected one
-        spinner_list.setSelection(getInt(baseContext, R.string.selected_test_key, 0))
+        b.spinnerList.setSelection(getInt(baseContext, R.string.selected_test_key, 0))
     }
 
     protected fun showAppNotInstalledDialog(appTitle: String?, externalAppAction: String?) {
-        val builder = AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog)
+        val builder = AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert)
         builder.setTitle(R.string.app_not_found)
             .setMessage(String.format(Locale.US, getString(R.string.install_app), appTitle))
             .setPositiveButton(R.string.go_to_play_store) { _: DialogInterface?, _: Int ->

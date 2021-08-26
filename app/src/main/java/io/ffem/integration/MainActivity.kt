@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -119,7 +118,7 @@ class MainActivity : MainBaseActivity() {
 
         // Check whether to run the external app in debug mode to receive dummy results
         // todo: For testing of app integration only. Remove this line for Production app
-        if (check_dummy_result!!.isChecked) {
+        if (b.checkDummyResult.isChecked) {
             data.putBoolean("debugMode", true)
         }
     }
@@ -156,7 +155,7 @@ class MainActivity : MainBaseActivity() {
             val jsonString = intent.getStringExtra(RESULT_JSON)
             try {
                 if (jsonString != null) {
-                    text_result!!.text = JSONObject(jsonString).toString(2)
+                    b.textResult.text = JSONObject(jsonString).toString(2)
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()
@@ -166,7 +165,7 @@ class MainActivity : MainBaseActivity() {
             val resultString = intent.getStringExtra(TEST_VALUE)
             try {
                 if (resultString != null) {
-                    text_result!!.text = getString(R.string.result_display, resultString)
+                    b.textResult.text = getString(R.string.result_display, resultString)
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()
