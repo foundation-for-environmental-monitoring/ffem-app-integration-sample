@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -48,7 +49,7 @@ class MainActivity : MainBaseActivity() {
             val intent = Intent(externalAppAction)
             intent.putExtras(data)
             // Start the external app activity
-            startActivityForResult(intent, EXTERNAL_REQUEST)
+            startTest.launch(intent)
         } catch (e: ActivityNotFoundException) {
             // The ffem app was not found so request the user to install the app from Play store
             showAppNotInstalledDialog(appTitle, externalAppAction)
@@ -104,7 +105,12 @@ class MainActivity : MainBaseActivity() {
             TOTAL_ALKALINITY -> {
                 appTitle = "ffem Water"
                 externalAppAction = "io.ffem.water"
-                "020dccb1-9a35-4097-bf02-292a92d7ae5a"
+                "WT-FM-TAlk"
+            }
+            TOTAL_HARDNESS -> {
+                appTitle = "ffem Water"
+                externalAppAction = "io.ffem.water"
+                "WT-FM-THrd"
             }
             else -> {
                 appTitle = "ffem Water"
@@ -123,24 +129,16 @@ class MainActivity : MainBaseActivity() {
         }
     }
 
-    /**
-     * Here we receive the result from the ffem app
-     *
-     * @param requestCode The code we used to make the request
-     * @param resultCode  Did we get a result ok or was it cancelled
-     * @param intent      The intent containing the result
-     */
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intent)
-        if (requestCode == EXTERNAL_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                displayResult(intent)
+    private var startTest =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                // Here we receive the result from the ffem app
+                displayResult(it.data)
                 showToastMessage(R.string.result_received)
             } else {
                 clearResultDisplay()
             }
         }
-    }
 
     /**
      * Here we are displaying the json text in our demo app
@@ -171,9 +169,5 @@ class MainActivity : MainBaseActivity() {
                 e.printStackTrace()
             }
         }
-    }
-
-    companion object {
-        private const val EXTERNAL_REQUEST = 1
     }
 }

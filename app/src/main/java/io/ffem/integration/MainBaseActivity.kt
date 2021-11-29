@@ -48,6 +48,7 @@ open class MainBaseActivity : BaseActivity() {
             FLUORIDE_LITE,
             RESIDUAL_CHLORINE_LITE,
             TOTAL_ALKALINITY,
+            TOTAL_HARDNESS,
             INVALID_TEST
         )
 

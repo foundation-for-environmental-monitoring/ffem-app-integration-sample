@@ -11,6 +11,7 @@ const val FLUORIDE = "Water - Fluoride"
 const val FLUORIDE_LITE = "Water - Fluoride (ffem Lite)"
 const val RESIDUAL_CHLORINE_LITE = "Water - Residual Chlorine (ffem Lite)"
 const val TOTAL_ALKALINITY = "Total Alkalinity"
+const val TOTAL_HARDNESS = "Total Hardness"
 const val INVALID_TEST = "Invalid Test Example"
 
 // Keys
