@@ -89,13 +89,13 @@ class MainActivity : MainBaseActivity() {
             }
             FLUORIDE -> {
                 appTitle = "ffem Water"
-                externalAppAction = "io.ffem.water"
-                "f0f3c1dd-89af-49f1-83e7-bcc31c3006cf"
+                externalAppAction = "hd.sensor"
+                "WC-HD-F"
             }
             FLUORIDE_LITE -> {
                 appTitle = "ffem Lite"
                 externalAppAction = "io.ffem.lite"
-                "f0f3c1dd-89af-49f1-83e7-bcc31cb61159"
+                "WC-FM-F"
             }
             RESIDUAL_CHLORINE_LITE -> {
                 appTitle = "ffem Lite"
@@ -104,13 +104,13 @@ class MainActivity : MainBaseActivity() {
             }
             TOTAL_ALKALINITY -> {
                 appTitle = "ffem Water"
-                externalAppAction = "io.ffem.water"
+                externalAppAction = "hd.sensor"
                 "WT-FM-TAlk"
             }
             TOTAL_HARDNESS -> {
                 appTitle = "ffem Water"
-                externalAppAction = "io.ffem.water"
-                "WT-FM-THrd"
+                externalAppAction = "hd.sensor"
+                "WT-HD-THrd"
             }
             else -> {
                 appTitle = "ffem Water"

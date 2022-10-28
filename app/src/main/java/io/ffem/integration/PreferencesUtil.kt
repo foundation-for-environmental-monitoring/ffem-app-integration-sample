@@ -12,9 +12,9 @@ import androidx.preference.PreferenceManager
  * @param defaultValue the default value
  * @return stored int value
  */
-fun getInt(context: Context?, key: String?, defaultValue: Int): Int {
+fun getInt(context: Context, key: String?, defaultValue: Int): Int {
     val sharedPreferences = PreferenceManager
-            .getDefaultSharedPreferences(context)
+        .getDefaultSharedPreferences(context)
     return sharedPreferences.getInt(key, defaultValue)
 }
 
@@ -59,9 +59,9 @@ object PreferencesUtil {
      * @param value   the value to set
      */
     @JvmStatic
-    fun setInt(context: Context?, key: String?, value: Int) {
+    fun setInt(context: Context, key: String?, value: Int) {
         val sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(context)
+            .getDefaultSharedPreferences(context)
         val editor = sharedPreferences.edit()
         editor.putInt(key, value)
         editor.apply()

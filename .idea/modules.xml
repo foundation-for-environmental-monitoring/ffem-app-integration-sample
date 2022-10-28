@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ffem_Integration.iml" filepath="$PROJECT_DIR$/.idea/modules/ffem_Integration.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ffem_Integration.app.unitTest.iml" />
     </modules>
   </component>
 </project>
