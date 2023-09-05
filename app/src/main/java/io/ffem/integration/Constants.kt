@@ -4,14 +4,13 @@ package io.ffem.integration
 const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id="
 
 // Some of the different types of tests that can be started
-const val AVAILABLE_IRON = "Soil - Available Iron"
-const val CALCIUM_MAGNESIUM = "Soil - Exchangeable Calcium and Magnesium"
+const val WATER_AVAILABLE_IRON = "Soil - Available Iron"
+const val SOIL_CALCIUM_MAGNESIUM = "Soil - Exchangeable Calcium and Magnesium"
 const val WATER_CALCIUM_MAGNESIUM = "Water - Calcium and Magnesium"
-const val FLUORIDE = "Water - Fluoride"
-const val FLUORIDE_LITE = "Water - Fluoride (ffem Lite)"
-const val RESIDUAL_CHLORINE_LITE = "Water - Residual Chlorine (ffem Lite)"
-const val TOTAL_ALKALINITY = "Total Alkalinity"
-const val TOTAL_HARDNESS = "Total Hardness"
+const val WATER_FLUORIDE = "Water - Fluoride"
+const val WATER_RESIDUAL_CHLORINE = "Water - Residual Chlorine"
+const val WATER_TOTAL_ALKALINITY = "Water - Total Alkalinity"
+const val WATER_TOTAL_HARDNESS = "Water - Total Hardness"
 const val INVALID_TEST = "Invalid Test Example"
 
 // Keys

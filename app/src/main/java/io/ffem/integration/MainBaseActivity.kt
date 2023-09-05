@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import io.ffem.integration.PreferencesUtil.getInt
 import io.ffem.integration.PreferencesUtil.setInt
 import io.ffem.integration.databinding.ActivityMainBinding
-import java.util.*
+import java.util.Locale
 
 /**
  * This class contains just the setup for the demo app only
@@ -41,14 +41,13 @@ open class MainBaseActivity : BaseActivity() {
         b.checkDummyResult.setOnCheckedChangeListener { _: CompoundButton?, _: Boolean -> clearResultDisplay() }
 
         val tests = mutableListOf(
-            AVAILABLE_IRON,
-            CALCIUM_MAGNESIUM,
+            WATER_AVAILABLE_IRON,
+            SOIL_CALCIUM_MAGNESIUM,
             WATER_CALCIUM_MAGNESIUM,
-            FLUORIDE,
-            FLUORIDE_LITE,
-            RESIDUAL_CHLORINE_LITE,
-            TOTAL_ALKALINITY,
-            TOTAL_HARDNESS,
+            WATER_FLUORIDE,
+            WATER_RESIDUAL_CHLORINE,
+            WATER_TOTAL_ALKALINITY,
+            WATER_TOTAL_HARDNESS,
             INVALID_TEST
         )
 

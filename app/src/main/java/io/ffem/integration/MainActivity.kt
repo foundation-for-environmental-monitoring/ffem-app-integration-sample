@@ -69,52 +69,41 @@ class MainActivity : MainBaseActivity() {
      * @param data the bundle data
      */
     private fun setupTestInformation(data: Bundle) {
+        appTitle = "ffem Match"
+        externalAppAction = "ffem.match"
+
         val testId = when (selectedTest) {
 
             // See README.md file to get test ids for all tests
-            AVAILABLE_IRON -> {
-                appTitle = "ffem Soil"
-                externalAppAction = "io.ffem.soil"
-                "3353f5cf-1cd2-4bf5-b47f-15d3db917add"
+            WATER_AVAILABLE_IRON -> {
+                "WC-FM-Fe"
             }
-            CALCIUM_MAGNESIUM -> {
-                appTitle = "ffem Soil"
-                externalAppAction = "io.ffem.soil"
-                "52ec4ca0-d691-4f2b-b17a-232c2966974a"
+
+            SOIL_CALCIUM_MAGNESIUM -> {
+                "ST-FM-CaMg"
             }
+
             WATER_CALCIUM_MAGNESIUM -> {
-                appTitle = "ffem Water"
-                externalAppAction = "io.ffem.water"
-                "670d2d65-bb76-4d72-ae4f-867d031b7712"
+                "WT-FM-CaMg"
             }
-            FLUORIDE -> {
-                appTitle = "ffem Water"
-                externalAppAction = "hd.sensor"
-                "WC-HD-F"
-            }
-            FLUORIDE_LITE -> {
-                appTitle = "ffem Lite"
-                externalAppAction = "io.ffem.lite"
+
+            WATER_FLUORIDE -> {
                 "WC-FM-F"
             }
-            RESIDUAL_CHLORINE_LITE -> {
-                appTitle = "ffem Lite"
-                externalAppAction = "io.ffem.lite"
-                "f1d64b11-64c4-4a34-806e-ad0d47bcc96b"
+
+            WATER_RESIDUAL_CHLORINE -> {
+                "WC-FM-Cl"
             }
-            TOTAL_ALKALINITY -> {
-                appTitle = "ffem Water"
-                externalAppAction = "hd.sensor"
+
+            WATER_TOTAL_ALKALINITY -> {
                 "WT-FM-TAlk"
             }
-            TOTAL_HARDNESS -> {
-                appTitle = "ffem Water"
-                externalAppAction = "hd.sensor"
-                "WT-HD-THrd"
+
+            WATER_TOTAL_HARDNESS -> {
+                "WT-FM-THrd"
             }
+
             else -> {
-                appTitle = "ffem Water"
-                externalAppAction = "io.ffem.water"
                 "invalid-test-id"
             }
         }
