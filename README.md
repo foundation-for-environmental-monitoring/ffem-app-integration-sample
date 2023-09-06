@@ -3,12 +3,11 @@ Sample app to demonstrate external app integration with ffem Match
 
 # Setup
 
-1. Install ffem Match apps [from Play store](https://play.google.com/store/apps/developer?id=Foundation+for+Environmental+Monitoring)
+1. Install ffem Match app [from Play store](https://play.google.com/store/apps/developer?id=Foundation+for+Environmental+Monitoring)
 1. Download and install Git and add it to your PATH
-1. Download and install Android Studio
 1. Clone this project locally
 1. Open the project in Android Studio
-1. Build and run the app on the same phone that has the above ffem apps installed [How to run apps on device](https://developer.android.com/training/basics/firstapp/running-app) 
+1. Build and run the app on the same phone that has the ffem Match app installed [How to run apps on device](https://developer.android.com/training/basics/firstapp/running-app) 
 
 # Using the app
 
@@ -16,10 +15,9 @@ Sample app to demonstrate external app integration with ffem Match
 1. Select the test to perform from the drop down on the top
 1. Ensure 'Request a dummy result' is checked
 1. Click the 'Launch Test' button
-1. ffem Match will launch
-1. Click the Next button
-1. The app will then return a dummy result back
-1. The json result will be displayed. Use this result as required in your app
+1. Wait for ffem Match to launch, Click the Next button
+1. A dummy result will be returned in json format
+1. Use this result as required in your app
 
 
 # How to use the code
@@ -36,9 +34,9 @@ Sample app to demonstrate external app integration with ffem Match
 
 # What info is needed to call ffem app
 
-- The only required info is the 'uuid' from the above json files
-- This will tell ffem Match which test to launch
-- To launch appropriate ffem app set intent action to either 'ffem.natch'
+- Set intent action to 'ffem.match'
+- Set 'testId' for the required test. ids are in the above json file
+- ffem Match launches the test based on the above id
 
 
 ```java
@@ -62,7 +60,7 @@ Sample app to demonstrate external app integration with ffem Match
       startActivityForResult(intent, 100);
  ```
 
-- After the Soil or Water test is finished the result gets returned to your app
+- After the Soil or Water test is finished the result is returned to your app
 ```java
       public void onActivityResult(int requestCode, int resultCode, Intent intent) {
           if (resultCode == RESULT_OK) {
@@ -71,7 +69,7 @@ Sample app to demonstrate external app integration with ffem Match
     }
  ```
 
-- Display the info provided in the json result as required in your app. Example of json below:
+- Use the returned json result as required in your app. Example of json below:
 ```json
  {
        "type": "ffem.match",
