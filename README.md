@@ -3,21 +3,30 @@ Sample app to demonstrate external app integration with ffem Match
 
 # Setup
 
-1. Install ffem Match app [from Play store](https://play.google.com/store/apps/developer?id=Foundation+for+Environmental+Monitoring)
-1. Download and install Git and add it to your PATH
-1. Clone this project locally
-1. Open the project in Android Studio
-1. Build and run the app on the same phone that has the ffem Match app installed [How to run apps on device](https://developer.android.com/training/basics/firstapp/running-app) 
+1. Clone and open this project in Android Studio
+1. Install ffem Match app on the phone [from Play store](https://play.google.com/store/apps/details?id=io.ffem.match)
+1. Build and run this project app on the same phone [How to run apps](https://developer.android.com/training/basics/firstapp/running-app) 
 
 # Using the app
 
-1. Launch ffem Integration app
-1. Select the test to perform from the drop down on the top
-1. Ensure 'Request a dummy result' is checked
-1. Click the 'Launch Test' button
-1. Wait for ffem Match to launch, Click the Next button
-1. A dummy result will be returned in json format
-1. Use this result as required in your app
+1. Launch ffem Integration app and click 'Launch Test'
+
+![Launch Test](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/26c701a5-190d-4d96-8792-14cbbc34a611)
+
+
+2. When ffem Match opens, follow the prompts to complete the test
+
+![Run Test](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/79d8a4d7-64d5-467b-ac79-c69da682ae93)
+
+   
+3. The test result screen will be displayed
+
+![Result](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/720e24da-95eb-49fa-abe7-fad3153f8a4a)
+
+4. Click Save and a json result will be returned to the integrated app
+
+![Json Result](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/66153eba-a0ec-429b-b845-d66b90a348ce)
+
 
 
 # How to use the code
