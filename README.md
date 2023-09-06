@@ -1,9 +1,9 @@
 # ffem-app-integration-sample
-Sample app to demonstrate external app integration with ffem Water and ffem Soil
+Sample app to demonstrate external app integration with ffem Match
 
 # Setup
 
-1. Install ffem Soil and/or ffem Water apps [from Play store](https://play.google.com/store/apps/developer?id=Foundation+for+Environmental+Monitoring)
+1. Install ffem Match apps [from Play store](https://play.google.com/store/apps/developer?id=Foundation+for+Environmental+Monitoring)
 1. Download and install Git and add it to your PATH
 1. Download and install Android Studio
 1. Clone this project locally
@@ -16,7 +16,7 @@ Sample app to demonstrate external app integration with ffem Water and ffem Soil
 1. Select the test to perform from the drop down on the top
 1. Ensure 'Request a dummy result' is checked
 1. Click the 'Launch Test' button
-1. ffem Water or ffem Soil will launch
+1. ffem Match will launch
 1. Click the Next button
 1. The app will then return a dummy result back
 1. The json result will be displayed. Use this result as required in your app
@@ -32,23 +32,22 @@ Sample app to demonstrate external app integration with ffem Water and ffem Soil
 
 # Where to find the meta info for the tests
 
-- For Soil tests get the info from <a href="https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/master/caddisfly-app/app/src/soil/assets/tests.json" target="_blank">Soil tests.json</a>
-- For Water tests get the info from <a href="https://github.com/foundation-for-environmental-monitoring/ffem-app/blob/master/caddisfly-app/app/src/water/assets/tests.json" target="_blank">Water tests.json</a>
+- Tests info at <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
 
 # What info is needed to call ffem app
 
 - The only required info is the 'uuid' from the above json files
-- This will tell ffem Soil or ffem Water which test to launch
-- To launch appropriate ffem app set intent action to either 'io.ffem.soil' or 'io.ffem.water'
+- This will tell ffem Match which test to launch
+- To launch appropriate ffem app set intent action to either 'ffem.natch'
 
 
 ```java
       // Create intent with appropriate app to launch
-      Intent intent = new Intent("io.ffem.soil");
+      Intent intent = new Intent("ffem.match");
 
       // Add the test uuid to the intent. (See how to get uuids above)
       Bundle data = new Bundle();
-      data.putString("testId", "3353f5cf-1cd2-4bf5-b47f-15d3db917add");
+      data.putString("testId", "WC-FM-F");
       
       // To make testing the integration easier also set debugMode to true
       // This will make the ffem apps return a dummy result
@@ -75,15 +74,15 @@ Sample app to demonstrate external app integration with ffem Water and ffem Soil
 - Display the info provided in the json result as required in your app. Example of json below:
 ```json
  {
-       "type": "io.ffem.soil",
-       "name": "Available Iron",
-       "uuid": "3353f5cf-1cd2-4bf5-b47f-15d3db917add",
+       "type": "ffem.match",
+       "name": "Fluoride",
+       "uuid": "WC-FM-F",
        "result": [{
            "dilution": 3,
-           "name": "Available Iron",
+           "name": "Fluoride",
            "unit": "mg/l",
            "id": 1,
-           "value": "> 30.00"
+           "value": "> 1.00"
        }],
        "testDate": "2018-09-19 01:05"
    }
@@ -96,8 +95,8 @@ Sample app to demonstrate external app integration with ffem Water and ffem Soil
 - A higher dilution factor usually denotes that the accuracy of the result may be lower
 
 # If ffem apps are not found for launching
-- If ffem Soil or ffem Water is not installed on the phone then you can request the user to install them
-- e.g. you could provide the link to the app install page https://play.google.com/store/apps/details?id=io.ffem.soil
+- If ffem Match is not installed on the phone then you can request the user to install them
+- e.g. you could provide the link to the app install page https://play.google.com/store/apps/details?id=io.ffem.match
 
 
 
