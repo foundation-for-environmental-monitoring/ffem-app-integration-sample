@@ -15,8 +15,7 @@ Sample app to demonstrate external app integration with ffem Match
    ![RunTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/fc0817d6-6dd6-4e35-86e0-dbd5194ca587)
 
 
-
-# How to use the code
+# The code
 
 - The code required for integration is in the MainActivity class
 - 'setupTestInformation' shows how to setup the data required before calling the external app
@@ -24,15 +23,11 @@ Sample app to demonstrate external app integration with ffem Match
 - 'displayResult' shows how to extract the json result returned
 - Copy the above functions to your app code and make changes to the test data as required
 
-# Where to find the meta info for the tests
-
-- Tests info at <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
-
-# What info is needed to call ffem app
+# Intent action and testId
 
 - Set intent action to 'ffem.match'
-- Set 'testId' for the required test. ids are in the above json file
-- ffem Match launches the test based on the above id
+- Set 'testId' for the required test
+- testId is in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
 
 
 ```java
@@ -81,14 +76,14 @@ Sample app to demonstrate external app integration with ffem Match
        "testDate": "2018-09-19 01:05"
    }
 ```
-# Additional info on returned json result
+# The returned json result
 
 - The value property has the result value. Suffix the unit property value to this
 - Note: the value can sometimes have a '>' (greater than) meaning that the actual result could be higher
 - For dilution: 0 or 1 = 'No Dilution',2 = '2 Times Dilution',etc... For info only, no further calculation required
 - A higher dilution factor usually denotes that the accuracy of the result may be lower
 
-# If ffem apps are not found for launching
+# If ffem Match app is not installed
 - If ffem Match is not installed on the phone then you can request the user to install them
 - e.g. you could provide the link to the app install page https://play.google.com/store/apps/details?id=io.ffem.match
 
