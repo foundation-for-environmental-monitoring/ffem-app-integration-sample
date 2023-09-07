@@ -1,24 +1,20 @@
 # ffem-app-integration-sample
 This sample app shows how to run a ffem Match test from your app
 
-# Setup
+# Run the app
 
-1. Clone and open this project in Android Studio
 1. Install ffem Match app on the phone [from Play store](https://play.google.com/store/apps/details?id=io.ffem.match)
-1. Build and run this project app on the same phone [How to run apps](https://developer.android.com/training/basics/firstapp/running-app) 
+1. Clone and run this project on the same phone [How to run apps](https://developer.android.com/training/basics/firstapp/running-app) 
+1. Click <b>Launch Test</b>
+1. Complete the water or soil test  
+1. Click <b>Save</b> to get the result in your app
 
-# Using the app
-
-1. Launch ffem Integration app and click <b>Launch Test</b>
-2. Follow the prompts to complete the test  
-4. Click <b>Save</b> and a json result will be returned to the integrated app
    ![RunTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/fc0817d6-6dd6-4e35-86e0-dbd5194ca587)
 
 
 # The code
 
-- The code required for integration is in the MainActivity class
-- 'setupTestInformation' shows how to setup the data required before calling the external app
+- 'setupTestInformation' in the MainActivity class shows how to set up the data
 - 'launchTest' shows how to launch the external app
 - 'displayResult' shows how to extract the json result returned
 - Copy the above functions to your app code and make changes to the test data as required
@@ -45,7 +41,7 @@ This sample app shows how to run a ffem Match test from your app
       startActivityForResult(intent, 100);
  ```
 
-- After the Soil or Water test is finished the result is returned to your app
+- Get the result after the Soil or Water test is completed
 ```java
       public void onActivityResult(int requestCode, int resultCode, Intent intent) {
           if (resultCode == RESULT_OK) {
@@ -72,9 +68,8 @@ This sample app shows how to run a ffem Match test from your app
 ```
 # Notes:
 
-- The value property has the result value. Suffix the unit property value to this
 - Note: the value can sometimes have a '>' (greater than) meaning that the actual result could be higher
-- For dilution: 0 or 1 = 'No Dilution',2 = '2 Times Dilution',etc... For info only, no further calculation required
+- For dilution: 0 or 1 = 'No Dilution', 2 = '2 Times Dilution', etc... For info only, no further calculation required
 - A higher dilution factor usually denotes that the accuracy of the result may be lower
 
 # If ffem Match app is not installed
