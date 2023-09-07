@@ -9,23 +9,10 @@ Sample app to demonstrate external app integration with ffem Match
 
 # Using the app
 
-1. Launch ffem Integration app and click 'Launch Test'
-
-![Launch Test](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/26c701a5-190d-4d96-8792-14cbbc34a611)
-
-
-2. When ffem Match opens, follow the prompts to complete the test
-
-![Run Test](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/79d8a4d7-64d5-467b-ac79-c69da682ae93)
-
-   
-3. The test result screen will be displayed
-
-![Result](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/720e24da-95eb-49fa-abe7-fad3153f8a4a)
-
-4. Click Save and a json result will be returned to the integrated app
-
-![Json Result](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/66153eba-a0ec-429b-b845-d66b90a348ce)
+1. Launch ffem Integration app and click <b>Launch Test</b>
+2. Follow the prompts to complete the test  
+4. Click <b>Save</b> and a json result will be returned to the integrated app
+   ![RunTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/fc0817d6-6dd6-4e35-86e0-dbd5194ca587)
 
 
 
