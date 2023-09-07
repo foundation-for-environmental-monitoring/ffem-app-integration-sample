@@ -1,5 +1,5 @@
 # ffem-app-integration-sample
-Sample app to demonstrate external app integration with ffem Match
+This sample app shows how to run a ffem Match test from your app
 
 # Setup
 
@@ -31,23 +31,17 @@ Sample app to demonstrate external app integration with ffem Match
 
 
 ```java
-      // Create intent with appropriate app to launch
       Intent intent = new Intent("ffem.match");
 
-      // Add the test uuid to the intent. (See how to get uuids above)
+      // Add the testId
       Bundle data = new Bundle();
       data.putString("testId", "WC-FM-F");
       
-      // To make testing the integration easier also set debugMode to true
-      // This will make the ffem apps return a dummy result
-      // This way conducting an actual water or soil test can be avoided 
-      // while testing the integration to save development time
+      // To return a dummy result without running an actual water or soil test
       data.putBoolean("debugMode", true);
       // Note: do not use the above line for production app.
       
       intent.putExtras(data)   
-
-      // Start the external app activity
       startActivityForResult(intent, 100);
  ```
 
@@ -60,12 +54,12 @@ Sample app to demonstrate external app integration with ffem Match
     }
  ```
 
-- Use the returned json result as required in your app. Example of json below:
+- Example of returned result:
 ```json
  {
        "type": "ffem.match",
        "name": "Fluoride",
-       "uuid": "WC-FM-F",
+       "parameterId": "WC-FM-F",
        "result": [{
            "dilution": 3,
            "name": "Fluoride",
@@ -76,7 +70,7 @@ Sample app to demonstrate external app integration with ffem Match
        "testDate": "2018-09-19 01:05"
    }
 ```
-# The returned json result
+# Notes:
 
 - The value property has the result value. Suffix the unit property value to this
 - Note: the value can sometimes have a '>' (greater than) meaning that the actual result could be higher
