@@ -1,6 +1,8 @@
 # ffem-app-integration-sample
 This sample app shows how to run a ffem Match test from your app
 
+&nbsp;
+
 # Run this sample app
 
 1. Install ffem Match app on the phone [from Play store](https://play.google.com/store/apps/details?id=io.ffem.match)
@@ -11,7 +13,8 @@ This sample app shows how to run a ffem Match test from your app
 
    ![RunTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/fc0817d6-6dd6-4e35-86e0-dbd5194ca587)
 
-
+&nbsp;
+____________
 # Code to launch ffem Match and run a specific test:
 ```java
       Intent intent = new Intent("ffem.match");
@@ -41,6 +44,10 @@ This sample app shows how to run a ffem Match test from your app
     }
  ```
 
+&nbsp;
+____________
+
+
 # Example of returned result:
 ```json
  {
@@ -57,25 +64,35 @@ This sample app shows how to run a ffem Match test from your app
        "testDate": "2018-09-19 01:05"
    }
 ```
-# Notes about the json result:
+# Notes:
 
 - value can sometimes have a '>' (greater than) meaning that the actual result could be higher
 - dilution: 0 or 1 = 'No Dilution', 2 = '2 Times Dilution', etc... For info only, no further calculation required
 - A higher dilution factor usually denotes that the accuracy of the result may be lower
+
+&nbsp;
+____________
+ 
 
 # Code in this project
 
 - [setupTestInformation](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L71) in the MainActivity class shows how to set up the data
 - [launchTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L44) shows how to launch ffem Match from your app
 - [displayResult](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L138) shows how to extract the json result returned
-  
+
+&nbsp;
+____________
+
 
 # If ffem Match app is not installed
 - If ffem Match is not installed on the phone then you can request the user to install them
 - e.g. you could provide the link to the app install page https://play.google.com/store/apps/details?id=io.ffem.match
 
+![app not found](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/370eeda9-66e7-45ec-9d36-b6df8de3f3b6)
 
 
+&nbsp;
+____________
 
 
 
