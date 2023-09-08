@@ -14,18 +14,12 @@ This sample app shows how to run a ffem Match test from your app
 
 # The code
 
-- 'setupTestInformation' in the MainActivity class shows how to set up the data
-- 'launchTest' shows how to launch the external app
-- 'displayResult' shows how to extract the json result returned
-- Copy the above functions to your app code and make changes to the test data as required
+- [setupTestInformation](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L71) in the MainActivity class shows how to set up the data
+- testId data is available in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
+- [launchTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L44) shows how to launch ffem Match from your app
+- [displayResult](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L138) shows how to extract the json result returned
 
-# Intent action and testId
-
-- Set intent action to 'ffem.match'
-- Set 'testId' for the required test
-- testId is in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
-
-
+# To launch ffem Match to run a specific test:
 ```java
       Intent intent = new Intent("ffem.match");
 
@@ -41,7 +35,7 @@ This sample app shows how to run a ffem Match test from your app
       startActivityForResult(intent, 100);
  ```
 
-- Get the result after the Soil or Water test is completed
+- To get the returned result:
 ```java
       public void onActivityResult(int requestCode, int resultCode, Intent intent) {
           if (resultCode == RESULT_OK) {
