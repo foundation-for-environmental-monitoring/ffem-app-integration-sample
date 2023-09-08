@@ -5,8 +5,8 @@ This sample app shows how to run a ffem Match test from your app
 
 # Run this sample app
 
-1. Install ffem Match app on the phone [from Play store](https://play.google.com/store/apps/details?id=io.ffem.match)
-1. Clone and run this project on the same phone [How to run apps](https://developer.android.com/training/basics/firstapp/running-app) 
+1. Install ffem Match app on the phone <a href="https://play.google.com/store/apps/details?id=io.ffem.match" target="_blank">from Play store</a>
+1. Clone and run this project on the same phone (<a href="https://developer.android.com/training/basics/firstapp/running-app" target="_blank">How to run apps</a>) 
 1. Click <b>Launch Test</b>
 1. Complete the water or soil test  
 1. Click <b>Save</b> to get the result in your app
@@ -16,16 +16,16 @@ This sample app shows how to run a ffem Match test from your app
 &nbsp;
 ____________
 # Code to launch ffem Match and run a specific test:
+
+- Note: testId data is available in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
+
 ```java
       Intent intent = new Intent("ffem.match");
 
       // Add the testId
       Bundle data = new Bundle();
       data.putString("testId", "WC-FM-F");
- ```
-- Note: testId data is available in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
 
-```java      
       // To return a dummy result without running an actual water or soil test
       data.putBoolean("debugMode", true);
       // Note: do not use the above line for production app.
@@ -34,8 +34,8 @@ ____________
       startActivityForResult(intent, 100);
  ```
 
-
-- Code to get the returned result:
+&nbsp;
+# Code to get the returned result:
 ```java
       public void onActivityResult(int requestCode, int resultCode, Intent intent) {
           if (resultCode == RESULT_OK) {
