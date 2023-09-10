@@ -40,7 +40,9 @@ ____________
  ```
 
 &nbsp;
-# Get dummy result (without running actual soil/water test)
+# Get dummy result
+During development use the following code to quickly get the test result without running the actual soil/water test
+
 ```java
       // Add the testId
       ...
@@ -51,6 +53,8 @@ ____________
       ...
       startActivityForResult(intent, 100);
  ```
+![dummy result flow](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/e5e5d254-1bf1-43b4-9759-a70a1d285010)
+
 
 &nbsp;
 ____________
