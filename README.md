@@ -10,7 +10,8 @@ This sample app shows how to run a ffem Match test from your app
 1. Click <b>Launch Test</b> and complete the soil/water test  
 1. Click <b>Save</b> to get the result in your app
 
-   ![RunTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/fc0817d6-6dd6-4e35-86e0-dbd5194ca587)
+![App flow](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/df35d2d4-7ec2-4a27-a508-c39744a5a85e)
+
 
 &nbsp;
 ____________
