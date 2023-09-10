@@ -7,8 +7,7 @@ This sample app shows how to run a ffem Match test from your app
 
 1. Install ffem Match app on the phone <a href="https://play.google.com/store/apps/details?id=io.ffem.match" target="_blank">from Play store</a>
 1. Clone and run this project on the same phone (<a href="https://developer.android.com/training/basics/firstapp/running-app" target="_blank">How to run apps</a>) 
-1. Click <b>Launch Test</b>
-1. Complete the water or soil test  
+1. Click <b>Launch Test</b> and complete the soil/water test  
 1. Click <b>Save</b> to get the result in your app
 
    ![RunTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/fc0817d6-6dd6-4e35-86e0-dbd5194ca587)
@@ -17,31 +16,39 @@ This sample app shows how to run a ffem Match test from your app
 ____________
 # Code to launch ffem Match and run a specific test:
 
-- Note: testId data is available in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
-
 ```java
       Intent intent = new Intent("ffem.match");
 
       // Add the testId
       Bundle data = new Bundle();
       data.putString("testId", "WC-FM-F");
-
-      // To return a dummy result without running an actual water or soil test
-      data.putBoolean("debugMode", true);
-      // Note: do not use the above line for production app.
-      
+     
       intent.putExtras(data)   
       startActivityForResult(intent, 100);
  ```
+- Note: testId data is available in <a href="https://github.com/foundation-for-environmental-monitoring/ffem-match/blob/master/colorCard/match-parameters.json" target="_blank">match-parameters.json</a>
 
 &nbsp;
 # Code to get the returned result:
 ```java
-      public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
           if (resultCode == RESULT_OK) {
             String jsonString = intent.getStringExtra("resultJson");
           }
     }
+ ```
+
+&nbsp;
+# Get dummy result (without running actual soil/water test)
+```java
+      // Add the testId
+      ...
+
+      // Include this line in development testing only
+      data.putBoolean("debugMode", true);
+
+      ...
+      startActivityForResult(intent, 100);
  ```
 
 &nbsp;
@@ -51,7 +58,8 @@ ____________
 # Example of returned result:
 ```json
  {
-       "type": "ffem.match",
+       "testType": "Card",
+       "sampleType": "Water",       
        "name": "Fluoride",
        "parameterId": "WC-FM-F",
        "result": [{
@@ -59,7 +67,7 @@ ____________
            "name": "Fluoride",
            "unit": "mg/l",
            "id": 1,
-           "value": "> 1.00"
+           "value": "> 2.00"
        }],
        "testDate": "2018-09-19 01:05"
    }
@@ -76,7 +84,7 @@ ____________
 
 # Code in this project
 
-- [setupTestInformation](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L71) in the MainActivity class shows how to set up the data
+- [setupTestInformation](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L71) shows how to set up the data
 - [launchTest](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L44) shows how to launch ffem Match from your app
 - [displayResult](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainActivity.kt#L138) shows how to extract the json result returned
 
@@ -84,9 +92,8 @@ ____________
 ____________
 
 
-# If ffem Match app is not installed
-- If ffem Match is not installed on the phone then you can request the user to install them
-- e.g. you could provide the link to the app install page https://play.google.com/store/apps/details?id=io.ffem.match
+# If ffem Match app is not installed on user's phone
+- If ffem Match is not installed then you can request the user to install from https://play.google.com/store/apps/details?id=io.ffem.match
 
 ![app not found](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/370eeda9-66e7-45ec-9d36-b6df8de3f3b6)
 
