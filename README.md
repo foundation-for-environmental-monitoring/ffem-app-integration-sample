@@ -99,8 +99,10 @@ ____________
 
 # If ffem Match app is not installed on user's phone
 - If ffem Match is not installed then you can request the user to install from https://play.google.com/store/apps/details?id=io.ffem.match
+- See Code: [showAppNotInstalledDialog](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/blob/8ca44d58b85916d72fa7dc3bb96a986c10f0f261/app/src/main/java/io/ffem/integration/MainBaseActivity.kt#L82)
 
 ![app not found](https://github.com/foundation-for-environmental-monitoring/ffem-app-integration-sample/assets/4124856/370eeda9-66e7-45ec-9d36-b6df8de3f3b6)
+
 
 
 &nbsp;
