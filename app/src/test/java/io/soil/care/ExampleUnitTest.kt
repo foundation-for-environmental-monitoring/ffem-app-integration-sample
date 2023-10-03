@@ -1,4 +1,4 @@
-package io.ffem.integration
+package io.soil.care
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

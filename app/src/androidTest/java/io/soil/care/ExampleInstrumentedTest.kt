@@ -1,4 +1,4 @@
-package io.ffem.integration
+package io.soil.care
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

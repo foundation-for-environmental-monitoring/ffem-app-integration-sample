@@ -1,4 +1,4 @@
-package io.ffem.integration
+package io.soil.care
 
 import android.content.Context
 import androidx.annotation.StringRes

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ffem Integration</string>
+    <string name="app_name">soil care</string>
     <string name="launch_test">Launch Test</string>
     <string name="request_dummy_result">Request a dummy result</string>
     <string name="result_received">Result received</string>
