@@ -1,4 +1,4 @@
-package io.ffem.integration
+package io.soil.care
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -10,9 +10,9 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import androidx.appcompat.app.AlertDialog
-import io.ffem.integration.PreferencesUtil.getInt
-import io.ffem.integration.PreferencesUtil.setInt
-import io.ffem.integration.databinding.ActivityMainBinding
+import io.soil.care.PreferencesUtil.getInt
+import io.soil.care.PreferencesUtil.setInt
+import io.soil.care.databinding.ActivityMainBinding
 import java.util.Locale
 
 /**
@@ -34,21 +34,24 @@ open class MainBaseActivity : BaseActivity() {
     }
 
     fun clearResultDisplay() {
-        b.textResult.text = ""
+        b.textViewName.text = ""
     }
 
     private fun initialize() {
         b.checkDummyResult.setOnCheckedChangeListener { _: CompoundButton?, _: Boolean -> clearResultDisplay() }
 
         val tests = mutableListOf(
-            WATER_AVAILABLE_IRON,
-            SOIL_CALCIUM_MAGNESIUM,
-            WATER_CALCIUM_MAGNESIUM,
-            WATER_FLUORIDE,
-            WATER_RESIDUAL_CHLORINE,
-            WATER_TOTAL_ALKALINITY,
-            WATER_TOTAL_HARDNESS,
-            INVALID_TEST
+            SOIL_PH,
+            ORGANIC_CARBON,
+            AVAILABLE_NEW_NITROGEN,
+            AVAILABLE_NEW_PHOSPHORUS,
+            AVAILABLE_NEW_POTASH,
+            CALCIUM_MAGNESIUM,
+            AVAILABLE_IRON,
+            AVAILABLE_BORON,
+            AVAILABLE_COPPER,
+            AVAILABLE_ZINC,
+            AVAILABLE_MANGANESE
         )
 
         // Creating adapter for spinner

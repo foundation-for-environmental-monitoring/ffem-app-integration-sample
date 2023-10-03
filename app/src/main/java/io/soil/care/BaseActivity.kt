@@ -1,11 +1,11 @@
-package io.ffem.integration
+package io.soil.care
 
 import android.content.Context
 import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import io.ffem.integration.R.style
+import io.soil.care.R.style
 
 open class BaseActivity : AppCompatActivity() {
 

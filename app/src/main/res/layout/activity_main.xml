@@ -35,15 +35,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/selectLayout">
 
-        <TextView
-            android:id="@+id/text_result"
+        <LinearLayout
+            android:id="@+id/customJsonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="#000"
-            android:textSize="17sp" />
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Type, Name, and UUID -->
+            <TextView
+                android:id="@+id/textViewType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: "
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "/>
+
+            <TextView
+                android:id="@+id/textViewUUID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UUID: "/>
+
+            <!-- Results Title -->
+            <TextView
+                android:id="@+id/textViewResultsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Results:"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Dynamically added result items -->
+            <LinearLayout
+                android:id="@+id/linearResultsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- This is where the result items and delete buttons will be added dynamically -->
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
